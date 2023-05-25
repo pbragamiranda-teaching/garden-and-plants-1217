@@ -10,6 +10,17 @@
       <div class="col-3 card-category m-2" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= plant.image_url %>');">
         <%= plant.name %>
         <%= link_to "x", plant_path(plant), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "card-remove-link" %>
+        <div class="card-tags">
+          <% plant.plant_tags.each do |plant_tag| %>
+            <span>
+              <%= plant_tag.tag.name  %>
+              <%= link_to plant_tag_path(plant_tag), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} do %>
+                <i class="fa-regular fa-trash-can fa-sm"></i>
+              <% end %>
+            </span>
+          <% end %>
+        </div>
+        <%= link_to '+', new_plant_plant_tag_path(plant), style: "text-decoration:none" %>
       </div>
     <% end %>
   </div>
